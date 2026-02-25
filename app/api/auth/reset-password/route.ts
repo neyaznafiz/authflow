@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import User from "@/models/User";
-import mongodb from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
 
 export async function POST(req: NextRequest) {
     try {
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        await mongodb;
+        await dbConnect();
 
         const user = await User.findOne({
             resetToken: token,
