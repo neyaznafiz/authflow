@@ -38,9 +38,9 @@ export async function POST(req: Request) {
         console.log(`[DEV] Resend OTP for ${identifier}: ${otp}`);
 
         return NextResponse.json(
-            { 
+            {
                 message: "OTP resent successfully",
-                otp: otp 
+                otp: otp,
             },
             { status: 200 },
         );

@@ -114,7 +114,11 @@ function ResetPasswordForm() {
                             Please request a new reset link if the current one
                             is invalid or expired.
                         </p>
-                        <a href="/forgot-password" title="Forgot Password" className="btn-primary inline-block">
+                        <a
+                            href="/forgot-password"
+                            title="Forgot Password"
+                            className="btn-primary inline-block"
+                        >
                             Go to Forgot Password
                         </a>
                     </div>
@@ -166,7 +170,13 @@ function ResetPasswordForm() {
 
 export default function ResetPassword() {
     return (
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="animate-spin" /></div>}>
+        <Suspense
+            fallback={
+                <div className="min-h-screen flex items-center justify-center">
+                    <Loader2 className="animate-spin" />
+                </div>
+            }
+        >
             <ResetPasswordForm />
         </Suspense>
     );

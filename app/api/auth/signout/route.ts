@@ -6,7 +6,10 @@ export async function POST(req: Request) {
     try {
         const authHeader = req.headers.get("authorization");
         if (!authHeader || !authHeader.startsWith("Bearer ")) {
-            return NextResponse.json({ message: "No token provided" }, { status: 401 });
+            return NextResponse.json(
+                { message: "No token provided" },
+                { status: 401 },
+            );
         }
 
         const token = authHeader.split(" ")[1];
@@ -24,7 +27,7 @@ export async function POST(req: Request) {
 
         const response = NextResponse.json(
             { message: "Signed out successfully" },
-            { status: 200 }
+            { status: 200 },
         );
 
         response.cookies.set("refreshToken", "", {
@@ -37,7 +40,7 @@ export async function POST(req: Request) {
         console.error("Signout error:", error);
         return NextResponse.json(
             { message: "Internal server error" },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }

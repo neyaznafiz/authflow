@@ -42,10 +42,7 @@ export async function GET(req: Request) {
             );
         }
 
-        return NextResponse.json(
-            { user, accessToken: token },
-            { status: 200 },
-        );
+        return NextResponse.json({ user, accessToken: token }, { status: 200 });
     } catch (error: any) {
         console.error("Token verification error:", error);
         return NextResponse.json(

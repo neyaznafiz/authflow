@@ -50,11 +50,9 @@ export async function POST(req: Request) {
             { expiresIn: "15m" },
         );
 
-        const refreshToken = jwt.sign(
-            { userId: user._id },
-            JWT_SECRET,
-            { expiresIn: "7d" },
-        );
+        const refreshToken = jwt.sign({ userId: user._id }, JWT_SECRET, {
+            expiresIn: "7d",
+        });
 
         // Save active token and refresh token in DB
         user.active_token = token;

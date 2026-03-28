@@ -119,16 +119,18 @@ export default function ForgotPassword() {
                 </form>
 
                 {resetLink && (
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         className="mt-8 p-4 bg-zinc-50 border border-zinc-100 rounded-lg shadow-sm"
                     >
-                        <p className="text-xs text-zinc-900 font-medium mb-2 uppercase tracking-wider">Reset Link:</p>
-                        <a 
-                            href={resetLink} 
-                            className="text-sm text-zinc-600 hover:text-zinc-900 hover:underline break-all transition-colors" 
-                            target="_blank" 
+                        <p className="text-xs text-zinc-900 font-medium mb-2 uppercase tracking-wider">
+                            Reset Link:
+                        </p>
+                        <a
+                            href={resetLink}
+                            className="text-sm text-zinc-600 hover:text-zinc-900 hover:underline break-all transition-colors"
+                            target="_blank"
                             rel="noopener noreferrer"
                         >
                             {resetLink}

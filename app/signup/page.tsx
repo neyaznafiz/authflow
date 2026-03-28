@@ -68,8 +68,10 @@ export default function SignUp() {
                 message: "Account created! Redirecting to verification...",
             });
 
-            setTimeout(() => { 
-                router.push(`/verify-otp?email=${encodeURIComponent(data.identifier as string)}&devOtp=${result.otp}`); 
+            setTimeout(() => {
+                router.push(
+                    `/verify-otp?email=${encodeURIComponent(data.identifier as string)}&devOtp=${result.otp}`,
+                );
             }, 1000);
         } catch (error: any) {
             setStatus({ type: "error", message: error.message });

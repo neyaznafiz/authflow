@@ -12,7 +12,7 @@ function VerifyOTPContent() {
     const searchParams = useSearchParams();
     const emailStr = searchParams.get("email") || "";
     const devOtp = searchParams.get("devOtp");
-    
+
     const [isLoading, setIsLoading] = useState(false);
     const [isResending, setIsResending] = useState(false);
     const [timeLeft, setTimeLeft] = useState(60);
@@ -151,10 +151,14 @@ function VerifyOTPContent() {
                         required
                         defaultValue={emailStr}
                         readOnly={!!emailStr}
-                        className={clsx("input-field", emailStr && "text-zinc-500 bg-zinc-50 border-zinc-200 cursor-not-allowed")}
+                        className={clsx(
+                            "input-field",
+                            emailStr &&
+                                "text-zinc-500 bg-zinc-50 border-zinc-200 cursor-not-allowed",
+                        )}
                     />
                 </div>
-                
+
                 <div className="space-y-1">
                     <label className="text-[10px] uppercase tracking-widest font-semibold text-zinc-400">
                         6-Digit OTP
@@ -183,7 +187,7 @@ function VerifyOTPContent() {
                             "Verify Account"
                         )}
                     </button>
-                    
+
                     <div className="text-center pt-2">
                         <button
                             type="button"
@@ -191,25 +195,25 @@ function VerifyOTPContent() {
                             disabled={timeLeft > 0 || isResending}
                             className="text-xs text-zinc-500 hover:text-zinc-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                         >
-                            {isResending ? (
-                                "Resending..."
-                            ) : timeLeft > 0 ? (
-                                `Resend OTP in ${timeLeft}s`
-                            ) : (
-                                "Resend OTP"
-                            )}
+                            {isResending
+                                ? "Resending..."
+                                : timeLeft > 0
+                                  ? `Resend OTP in ${timeLeft}s`
+                                  : "Resend OTP"}
                         </button>
                     </div>
                 </div>
             </form>
 
             {currentDevOtp && (
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="mt-8 p-4 bg-zinc-50 border border-zinc-100 rounded-lg shadow-sm"
                 >
-                    <p className="text-xs text-zinc-900 font-medium mb-2 uppercase tracking-wider">Generated OTP:</p>
+                    <p className="text-xs text-zinc-900 font-medium mb-2 uppercase tracking-wider">
+                        Generated OTP:
+                    </p>
                     <div className="text-lg tracking-[0.5em] text-zinc-600 font-medium transition-colors">
                         {currentDevOtp}
                     </div>
@@ -225,7 +229,13 @@ function VerifyOTPContent() {
 export default function VerifyOTP() {
     return (
         <div className="min-h-screen flex items-center justify-center p-6 bg-white">
-            <Suspense fallback={<div className="text-sm text-zinc-400 font-light w-full max-w-sm">Loading verification...</div>}>
+            <Suspense
+                fallback={
+                    <div className="text-sm text-zinc-400 font-light w-full max-w-sm">
+                        Loading verification...
+                    </div>
+                }
+            >
                 <VerifyOTPContent />
             </Suspense>
         </div>

@@ -35,10 +35,10 @@ export async function POST(req: Request) {
         console.log(`[DEV] OTP for ${identifier}: ${otp}`);
 
         return NextResponse.json(
-            { 
-                message: "User created successfully", 
+            {
+                message: "User created successfully",
                 userId: user._id,
-                otp: otp
+                otp: otp,
             },
             { status: 201 },
         );

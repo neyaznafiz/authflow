@@ -23,7 +23,8 @@ export async function verifySession() {
                     method: "POST",
                 });
 
-                if (!refreshRes.ok) throw new Error("Unable to refresh session");
+                if (!refreshRes.ok)
+                    throw new Error("Unable to refresh session");
 
                 const refreshData = await refreshRes.json();
                 localStorage.setItem("accessToken", refreshData.accessToken);
@@ -35,7 +36,8 @@ export async function verifySession() {
                     },
                 });
 
-                if (!retryRes.ok) throw new Error("Invalid token after refresh");
+                if (!retryRes.ok)
+                    throw new Error("Invalid token after refresh");
 
                 const retryData = await retryRes.json();
                 return retryData.user;
@@ -55,5 +57,3 @@ export async function verifySession() {
         throw error;
     }
 }
-
-

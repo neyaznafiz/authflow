@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
         if (!refreshToken) {
             return NextResponse.json(
                 { message: "Refresh token required" },
-                { status: 401 }
+                { status: 401 },
             );
         }
 
@@ -18,18 +18,20 @@ export async function POST(req: NextRequest) {
         if (!JWT_SECRET) {
             return NextResponse.json(
                 { message: "Server configuration error" },
-                { status: 500 }
+                { status: 500 },
             );
         }
 
         // Verify the refresh token cryptographically
         let decoded;
         try {
-            decoded = jwt.verify(refreshToken, JWT_SECRET) as { userId: string };
+            decoded = jwt.verify(refreshToken, JWT_SECRET) as {
+                userId: string;
+            };
         } catch (err) {
             return NextResponse.json(
                 { message: "Invalid or expired refresh token" },
-                { status: 401 }
+                { status: 401 },
             );
         }
 
@@ -39,7 +41,7 @@ export async function POST(req: NextRequest) {
         if (!user) {
             return NextResponse.json(
                 { message: "User not found" },
-                { status: 404 }
+                { status: 404 },
             );
         }
 
@@ -47,7 +49,7 @@ export async function POST(req: NextRequest) {
         if (user.refresh_token !== refreshToken) {
             return NextResponse.json(
                 { message: "Invalid refresh token session" },
-                { status: 401 }
+                { status: 401 },
             );
         }
 
@@ -61,15 +63,12 @@ export async function POST(req: NextRequest) {
         user.active_token = newToken;
         await user.save();
 
-        return NextResponse.json(
-            { accessToken: newToken },
-            { status: 200 }
-        );
+        return NextResponse.json({ accessToken: newToken }, { status: 200 });
     } catch (error: any) {
         console.error("Refresh error:", error);
         return NextResponse.json(
             { message: "Internal server error" },
-            { status: 500 }
+            { status: 500 },
         );
     }
 }
