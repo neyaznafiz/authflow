@@ -14,9 +14,9 @@ export const metadata: Metadata = {
         template: "%s | AuthFlow",
     },
     description: "A clean, highly secure, and beautifully designed authentication system built with Next.js 15, React 19, and MongoDB.",
-    keywords: ["Next.js", "Authentication", "React 19", "MongoDB", "AuthFlow", "Secure Auth", "JWT", "Auth Starter"],
-    authors: [{ name: "AuthFlow Team" }],
-    creator: "AuthFlow",
+    keywords: ["Next.js", "Authentication", "React 19", "MongoDB", "AuthFlow", "Secure Auth", "JWT", "Auth Starter", "Bitlaab", "Neyaz Nafiz", "AuthFlow Next.js", "nextjs authentication"],
+    authors: [{ name: "Neyaz Nafiz" }],
+    creator: "Neyaz Nafiz",
     publisher: "Bitlaab",
     formatDetection: {
         email: false,

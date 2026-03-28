@@ -41,7 +41,7 @@ export default function Footer() {
                         </h3>
                         <ul className="space-y-4">
                             <li>
-                                <Link href="https://bitlaab.com/about" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors font-light">About Us</Link>
+                                <Link href="https://bitlaab.com" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors font-light">About Us</Link>
                             </li>
                             <li>
                                 <Link href="https://bitlaab.com/privacy-policy" target="_blank" rel="noopener noreferrer" className="text-sm text-zinc-600 hover:text-zinc-900 transition-colors font-light">Privacy Policy</Link>
