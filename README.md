@@ -100,7 +100,7 @@ npm install
 
 ### 3. Setup Environment Variables
 
-Clone the `.env_example` (or use the template below) to a new `.env` file in the root directory:
+Clone the `.env.example` (or use the template below) to a new `.env` file in the root directory:
 
 ```env
 # Database name
