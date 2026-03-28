@@ -1,6 +1,11 @@
 /**
  * Model: User
  * Description: MongoDB Schema for user authentication, session management, and verification.
+ * Collection: "users" (explicitly defined in schema options)
+ *
+ * This schema includes security features like UUIDv7 identifiers, hashed passwords,
+ * multi-token JWT fields (active and refresh), and OTP verification mechanisms.
+ * Timestamps (created_at and updated_at) are stored as Unix timestamps in milliseconds.
  */
 import mongoose from "mongoose";
 import { v7 as uuidv7 } from "uuid";
@@ -62,7 +67,8 @@ const UserSchema = new mongoose.Schema(
             updatedAt: "updated_at",
             currentTime: () => Date.now(),
         },
-    },
+        collection: "users"
+    }
 );
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);
