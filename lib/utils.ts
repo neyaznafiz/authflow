@@ -10,24 +10,42 @@ export async function verifySession() {
     }
 
     try {
-        const response = await fetch("/api/auth/verify", {
+        const response = await fetch("/api/auth/verify-session", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
 
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || "Invalid token");
+            if (response.status === 401) {
+                // Access token expired, attempt to refresh via cookie
+                const refreshRes = await fetch("/api/auth/refresh", {
+                    method: "POST",
+                });
+
+                if (!refreshRes.ok) throw new Error("Unable to refresh session");
+
+                const refreshData = await refreshRes.json();
+                localStorage.setItem("accessToken", refreshData.accessToken);
+
+                // Retry original request with new token
+                const retryRes = await fetch("/api/auth/verify-session", {
+                    headers: {
+                        Authorization: `Bearer ${refreshData.accessToken}`,
+                    },
+                });
+
+                if (!retryRes.ok) throw new Error("Invalid token after refresh");
+
+                const retryData = await retryRes.json();
+                return retryData.user;
+            } else {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Invalid token");
+            }
         }
 
         const data = await response.json();
-
-        // Update stored user info and renewed token
-        localStorage.setItem("user", JSON.stringify(data.user));
-        if (data.accessToken) {
-            localStorage.setItem("accessToken", data.accessToken);
-        }
 
         return data.user;
     } catch (error) {
@@ -38,10 +56,4 @@ export async function verifySession() {
     }
 }
 
-/**
- * Clears the current session and redirects to home.
- */
-export function logout() {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("user");
-}
+

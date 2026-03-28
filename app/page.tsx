@@ -55,9 +55,6 @@ export default function SignIn() {
             if (result.accessToken) {
                 localStorage.setItem("accessToken", result.accessToken);
             }
-            if (result.user) {
-                localStorage.setItem("user", JSON.stringify(result.user));
-            }
 
             setStatus({
                 type: "success",

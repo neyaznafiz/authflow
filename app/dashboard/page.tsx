@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 import { LogOut, User, LayoutDashboard } from "lucide-react";
-import { verifySession, logout } from "@/lib/utils";
+import { verifySession } from "@/lib/utils";
 
 export default function Dashboard() {
     const router = useRouter();
@@ -34,8 +34,7 @@ export default function Dashboard() {
     }, [router]);
 
     const handleLogout = () => {
-        logout();
-        router.push("/");
+        router.push("/signout");
     };
 
     if (isLoading) {

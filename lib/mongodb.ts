@@ -26,7 +26,7 @@ async function dbConnect() {
 
     if (!cached.promise) {
         const opts = {
-            dbName: "authflow",
+            dbName: process.env.DB_NAME,
             bufferCommands: false,
         };
 

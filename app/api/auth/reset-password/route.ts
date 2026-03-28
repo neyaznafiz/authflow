@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
 
         const user = await User.findOne({
             reset_token: token,
-            reset_token_expiry: { $gt: new Date() },
+            reset_token_expiry: { $gt: Date.now() },
         });
 
         if (!user) {

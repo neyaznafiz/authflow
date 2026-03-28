@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema(
             default: null,
         },
         reset_token_expiry: {
-            type: Date,
+            type: Number,
             default: null,
         },
         verified: {
@@ -34,6 +34,14 @@ const UserSchema = new mongoose.Schema(
             default: false,
         },
         verification_otp: {
+            type: String,
+            default: null,
+        },
+        active_token: {
+            type: String,
+            default: null,
+        },
+        refresh_token: {
             type: String,
             default: null,
         },

@@ -35,15 +35,15 @@ export async function GET(req: Request) {
             );
         }
 
-        // Generate a new token for auto-renewal
-        const newToken = jwt.sign(
-            { userId: user._id, identifier: user.identifier },
-            JWT_SECRET,
-            { expiresIn: "1d" },
-        );
+        if (user.active_token !== token) {
+            return NextResponse.json(
+                { message: "Invalid or expired session" },
+                { status: 401 },
+            );
+        }
 
         return NextResponse.json(
-            { user, accessToken: newToken },
+            { user, accessToken: token },
             { status: 200 },
         );
     } catch (error: any) {

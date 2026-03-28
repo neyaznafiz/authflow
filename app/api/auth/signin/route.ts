@@ -47,10 +47,21 @@ export async function POST(req: Request) {
         const token = jwt.sign(
             { userId: user._id, identifier: user.identifier },
             JWT_SECRET,
-            { expiresIn: "1d" },
+            { expiresIn: "15m" },
         );
 
-        return NextResponse.json(
+        const refreshToken = jwt.sign(
+            { userId: user._id },
+            JWT_SECRET,
+            { expiresIn: "7d" },
+        );
+
+        // Save active token and refresh token in DB
+        user.active_token = token;
+        user.refresh_token = refreshToken;
+        await user.save();
+
+        const response = NextResponse.json(
             {
                 message: "Signed in successfully",
                 accessToken: token,
@@ -62,6 +73,16 @@ export async function POST(req: Request) {
             },
             { status: 200 },
         );
+
+        response.cookies.set("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 7 * 24 * 60 * 60, // 7 days
+            path: "/",
+        });
+
+        return response;
     } catch (error: any) {
         console.error("Signin error:", error);
         return NextResponse.json(
